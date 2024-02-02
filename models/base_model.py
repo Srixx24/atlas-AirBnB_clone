@@ -10,14 +10,21 @@ class BaseModel:
     """
     Defines all common funtionality for other classes
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Start of BaseModel instance"""
-        # Makes unique id for instance
-        self.id = str(uuid.uuid4())
-        # Sets created_at to current datetime
-        self.created_at = datetime.now()
-        # Sets updated_at to current datetime
-        self.updated_at = datetime.now()
+        strformat = "%Y-%m-%dT%H:%M:%S.%f"
+        if kwargs:
+            for key in kwargs:
+                if key == "created_at" or key == "updated_at":
+                    kwargs[key] = datetime.strptime(kwargs[key], strformat)
+                setattr(self, key, kwargs[key])
+        else:
+            # Makes unique id for instance
+            self.id = str(uuid.uuid4())
+            # Sets created_at to current datetime
+            self.created_at = datetime.now()
+            # Sets updated_at to current datetime
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """Prints the string representation of attributes"""
