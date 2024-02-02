@@ -10,10 +10,11 @@ class BaseModel:
     """
     Defines all common funtionality for other classes
     """
-    def __init__(self):
+    def __init__(self, uuid_func=None):
         """Start of BaseModel instance"""
         # Makes unique id for instance
-        self.id = str(uuid.uuid4())
+        #updated for test casing, can be changed back whenever
+        self.id = uuid_func() if uuid_func else str(uuid.uuid4())
         # Sets created_at to current datetime
         self.created_at = datetime.now()
         # Sets updated_at to current datetime
@@ -43,6 +44,6 @@ class BaseModel:
         # Converting to ISO format str
         dictionary["created_at"] = self.created_at.isoformat()
         # Converting to ISO format str
-        dictionary["update_at"] = self.updated_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
         # Returning dict
         return dictionary
