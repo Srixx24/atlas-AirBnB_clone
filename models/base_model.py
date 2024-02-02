@@ -16,8 +16,11 @@ class BaseModel:
         if kwargs:
             for key in kwargs:
                 if key == "created_at" or key == "updated_at":
-                    kwargs[key] = datetime.strptime(kwargs[key], strformat)
-                setattr(self, key, kwargs[key])
+                    setattr(self, key, datetime.strptime(kwargs[key], strformat))
+                elif key == "__class__":
+                    pass
+                else:
+                    setattr(self, key, kwargs[key])
         else:
             # Makes unique id for instance
             self.id = str(uuid.uuid4())
