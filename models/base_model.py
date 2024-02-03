@@ -12,14 +12,23 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         """Start of BaseModel instance"""
+        #Str format for strptime
         strformat = "%Y-%m-%dT%H:%M:%S.%f"
+        #check for kwargs
         if kwargs:
+            #loop through kwargs
             for key in kwargs:
+                #if created at or updated at
                 if key == "created_at" or key == "updated_at":
+                    #parse the argument to set a datetime object as attr
                     setattr(self, key, datetime.strptime(kwargs[key], strformat))
+                #if argument is "__class__" ignore, as is not an actual attr
                 elif key == "__class__":
+                    #ignore setting the attr
                     pass
+                #if key passes all prior checks
                 else:
+                    #set the attr
                     setattr(self, key, kwargs[key])
         else:
             # Makes unique id for instance
