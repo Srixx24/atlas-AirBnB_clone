@@ -10,14 +10,33 @@ class BaseModel:
     """
     Defines all common funtionality for other classes
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Start of BaseModel instance"""
-        # Makes unique id for instance
-        self.id = str(uuid.uuid4())
-        # Sets created_at to current datetime
-        self.created_at = datetime.now()
-        # Sets updated_at to current datetime
-        self.updated_at = datetime.now()
+        #Str format for strptime
+        strformat = "%Y-%m-%dT%H:%M:%S.%f"
+        #check for kwargs
+        if kwargs:
+            #loop through kwargs
+            for key in kwargs:
+                #if created at or updated at
+                if key == "created_at" or key == "updated_at":
+                    #parse the argument to set a datetime object as attr
+                    setattr(self, key, datetime.strptime(kwargs[key], strformat))
+                #if argument is "__class__" ignore, as is not an actual attr
+                elif key == "__class__":
+                    #ignore setting the attr
+                    pass
+                #if key passes all prior checks
+                else:
+                    #set the attr
+                    setattr(self, key, kwargs[key])
+        else:
+            # Makes unique id for instance
+            self.id = str(uuid.uuid4())
+            # Sets created_at to current datetime
+            self.created_at = datetime.now()
+            # Sets updated_at to current datetime
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """Prints the string representation of attributes"""
@@ -43,6 +62,6 @@ class BaseModel:
         # Converting to ISO format str
         dictionary["created_at"] = self.created_at.isoformat()
         # Converting to ISO format str
-        dictionary["update_at"] = self.updated_at.isoformat()
+        dictionary["updated_at"] = self.updated_at.isoformat()
         # Returning dict
         return dictionary
