@@ -45,11 +45,11 @@ class FileStorage:
             with open(self.__file_path, "r", encoding='utf-8') as file:
                 # Loads obj from file
                 obj = json.load(file)
-                for key in obj.keys():
+                for key, value in obj.items():
                     # Extract class name
                     class_name = value["__class__"]
                     # Creates new instance of the class
-                    self.__objects[key] = self.__class_name[key](**obj[key])
+                    self.__objects[key] = self.__class_name[class_name](**value)
         except FileNotFoundError:
             # Do nothing if file not found
             pass
