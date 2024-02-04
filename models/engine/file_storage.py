@@ -6,7 +6,6 @@ with various methods for JSON serialization
 """
 import json
 import importlib
-from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -43,6 +42,7 @@ class FileStorage:
 
     def reload(self):
         """Load intance from save"""
+        from models.base_model import BaseModel
         try:
             with open(self.__file_path, "r", encoding='utf-8') as file:
                 # Loads obj from filei
