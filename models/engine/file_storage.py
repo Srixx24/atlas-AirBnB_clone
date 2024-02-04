@@ -6,6 +6,7 @@ with various methods for JSON serialization
 """
 import json
 import importlib
+import models
 
 
 class FileStorage:
