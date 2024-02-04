@@ -4,7 +4,7 @@ Class BaseModel that defines all common attributes/methods
 """
 import uuid
 from datetime import datetime
-from models import storage
+from file_storage import FileStorage
 
 
 class BaseModel:
