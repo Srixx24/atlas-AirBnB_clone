@@ -42,16 +42,14 @@ class FileStorage:
     def reload(self):
         """Load intance from save"""
         try:
-            with open(self.__file_path, "r") as file:
+            with open(self.__file_path, "r", encoding='utf-8') as file:
                 # Loads obj from file
-                objects = json.load(file)
+                obj = json.load(file)
                 for key in obj.keys():
                     # Extract class name
                     class_name = value["__class__"]
                     # Creates new instance of the class
-                    new_obj = globals()[class_name](**value)
-                    # Adds new obj to the dict
-                    self.__objects[key] = new_obj
+                    self.__objects[key] = self.__class_name[key](**obj[key])
         except FileNotFoundError:
             # Do nothing if file not found
             pass
