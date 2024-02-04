@@ -12,7 +12,7 @@ class BaseModel:
     Defines all common funtionality for other classes
     """
     # Defines storage variable
-    storage = None
+    storage = FileStorage()
 
     def __init__(self, *args, **kwargs):
         """Start of BaseModel instance"""
