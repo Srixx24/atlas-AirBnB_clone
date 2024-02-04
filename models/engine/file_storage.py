@@ -42,26 +42,17 @@ class FileStorage:
 
     def reload(self):
         """Load intance from save"""
-        from models.base_model import BaseModel
-        try:
-            with open(self.__file_path, "r", encoding='utf-8') as file:
-                # Loads obj from filei
-                obj = json.load(file)
-                for key in obj.keys():
-                    # Extract class name
-                    class_name = obj[key]["__class__"]
-                    # Creates new instance of the class
-                    new_obj = self.selectClass(class_name)(obj[key])
-                    FileStorage.__objects[key] = new_obj
-        except FileNotFoundError:
-            # Do nothing if file not found
-            pass
-
-    def selectClass(self, class_name):
-        """Selects and returns the class from class_name"""
-        module_name = f"models.{class_name}"
-        # Generate the module name
-        module = importlib.import_module(module_name)
-        # Dynamically import the module
-        return getattr(module, class_name)
-        # Get the class from the module based on the class name
+        if os.path.exists(FileStorage.__file_path):
+            try:
+                with open(FileStorage.__file_path, mode='r') as jFile:
+                    # Loads obj from file
+                    obj = json.load(jFile)
+                    for key in obj.keys():
+                        # Extract class name
+                        class_name = obj[key]["__class__"]
+                        # Creates new instance of the class
+                        new_obj = self.selectClass(class_name)(obj[key])
+                        FileStorage.__objects[key] = new_obj
+            except FileNotFoundError:
+                # Do nothing if file not found
+                pass
