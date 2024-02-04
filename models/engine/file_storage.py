@@ -43,24 +43,33 @@ class FileStorage:
     def reload(self):
         """Load intance from save"""
         # Check if the JSON file exists
+        #   note for future ace: try isfile
         if os.path.exists(FileStorage.__file_path):
-            try:
-                # Open the JSON file
-                with open(FileStorage.__file_path, mode='r') as jFile:
-                    # Loads the data
-                    obj = json.load(jFile)
-                    # Iterate over the data
-                    for key in obj.keys():
-                        # Extract class name
-                        class_name = obj[key]["__class__"]
-                        # Dynamically import
-                        module = __import__('models.' + class_name, fromlist=[class_name])
-                        # Gets attributes
-                        obj_class = getattr(module, class_name)
-                        # Create a new instance of the class
-                        new_obj = obj_class(**value)
-                        # Store the new instance in dict
-                        FileStorage.__objects[key] = new_obj
-            except FileNotFoundError:
-                # Do nothing if file not found
-                pass
+            with open(self.__file_path, 'r') as file:
+                file_content = file.read()
+                self.__objects = json.loads(file_content)
+        else:
+            pass
+
+
+
+        #     try:
+        #         # Open the JSON file
+        #         with open(FileStorage.__file_path, mode='r') as jFile:
+        #             # Loads the data
+        #             obj = json.load(jFile)
+        #             # Iterate over the data
+        #             for key in obj.keys():
+        #                 # Extract class name
+        #                 class_name = obj[key]["__class__"]
+        #                 # Dynamically import
+        #                     # module = __import__('models.' + class_name, fromlist=[class_name])
+        #                 # Gets attributes
+        #                 obj_class = getattr(module, class_name)
+        #                 # Create a new instance of the class
+        #                 new_obj = obj_class(**value)
+        #                 # Store the new instance in dict
+        #                 FileStorage.__objects[key] = new_obj
+        #     except FileNotFoundError:return
+        #         # Do nothing if file not found
+        #         pass
