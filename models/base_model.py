@@ -11,7 +11,7 @@ class BaseModel:
     """
     Defines all common funtionality for other classes
     """
-    # Define storage variable
+    # Defines storage variable
     storage = None
 
     def __init__(self, *args, **kwargs):
