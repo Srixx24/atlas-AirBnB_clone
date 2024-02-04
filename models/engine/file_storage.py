@@ -5,6 +5,7 @@ The engine that runs file storage,
 with various methods for JSON serialization
 """
 import json
+import importlib
 
 
 class FileStorage:
@@ -43,7 +44,7 @@ class FileStorage:
         """Load intance from save"""
         try:
             with open(self.__file_path, "r", encoding='utf-8') as file:
-                # Loads obj from file
+                # Loads obj from filei
                 obj = json.load(file)
                 for key in obj.keys():
                     # Extract class name
@@ -54,3 +55,12 @@ class FileStorage:
         except FileNotFoundError:
             # Do nothing if file not found
             pass
+
+    def selectClass(self, class_name):
+        """Selects and returns the class from class_name"""
+        module_name = f"models.{class_name}"
+        # Generate the module name
+        module = importlib.import_module(module_name)
+        # Dynamically import the module
+        return getattr(module, class_name)
+        # Get the class from the module based on the class name
