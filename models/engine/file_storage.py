@@ -6,7 +6,7 @@ with various methods for JSON serialization
 """
 import json
 import importlib
-import models
+from models.base_model import BaseModel
 
 
 class FileStorage:
