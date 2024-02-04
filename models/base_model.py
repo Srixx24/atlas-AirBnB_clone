@@ -4,12 +4,16 @@ Class BaseModel that defines all common attributes/methods
 """
 import uuid
 from datetime import datetime
+from models.engine.file_storage import FileStorage
 
 
 class BaseModel:
     """
     Defines all common funtionality for other classes
     """
+    # Defines storage variable
+    storage = FileStorage()
+
     def __init__(self, *args, **kwargs):
         """Start of BaseModel instance"""
         #Str format for strptime
@@ -30,6 +34,8 @@ class BaseModel:
                 else:
                     #set the attr
                     setattr(self, key, kwargs[key])
+            # Saves new instance to storage
+            self.__class__.storage.new(self)
         else:
             # Makes unique id for instance
             self.id = str(uuid.uuid4())
@@ -37,6 +43,8 @@ class BaseModel:
             self.created_at = datetime.now()
             # Sets updated_at to current datetime
             self.updated_at = datetime.now()
+            # Saves new instance to storage
+            self.__class__.storage.new(self)
 
     def __str__(self):
         """Prints the string representation of attributes"""
@@ -52,6 +60,8 @@ class BaseModel:
         """Updates the current datetime"""
         # Updates with current datetime
         self.updated_at = datetime.now()
+        # Saves new instance to storage
+        self.__class__.storage.new(self)
 
     def to_dict(self):
         """Returns a dictionary with all values of the instance"""

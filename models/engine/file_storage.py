@@ -5,6 +5,7 @@ The engine that runs file storage,
 with various methods for JSON serialization
 """
 import json
+import os
 
 
 class FileStorage:
@@ -41,13 +42,25 @@ class FileStorage:
 
     def reload(self):
         """Load intance from save"""
-        with open(self.__file_path, "r") as file:
-            # Loads obj from file
-            objects = json.load(file)
-            for key in obj.keys():
-                # Extract class name
-                class_name = value["__class__"]
-                # Creates new instance of the class
-                new_obj = globals()[class_name](**value)
-                # Adds new obj to the dict
-                self.__objects[key] = new_obj
+        # Check if the JSON file exists
+        if os.path.exists(FileStorage.__file_path):
+            try:
+                # Open the JSON file
+                with open(FileStorage.__file_path, mode='r') as jFile:
+                    # Loads the data
+                    obj = json.load(jFile)
+                    # Iterate over the data
+                    for key in obj.keys():
+                        # Extract class name
+                        class_name = obj[key]["__class__"]
+                        # Dynamically import
+                        module = __import__('models.' + class_name, fromlist=[class_name])
+                        # Gets attributes
+                        obj_class = getattr(module, class_name)
+                        # Create a new instance of the class
+                        new_obj = obj_class(**value)
+                        # Store the new instance in dict
+                        FileStorage.__objects[key] = new_obj
+            except FileNotFoundError:
+                # Do nothing if file not found
+                pass
