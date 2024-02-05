@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
         obj = storage.all()
 
         # Print the obj string if it exsist and is in known classes
-        if obj_id in obj and isinstace(obj[obj_id], self.class_dict[class_name]):
+        if obj_id in obj and isinstance(obj[obj_id], self.class_dict[class_name]):
             print("{}".format(obj[obj_id]))
         else:
             # Return error otherwise
