@@ -44,12 +44,12 @@ class HBNBCommand(cmd.Cmd):
         # Extract the class name from the tokens
         class_name = toks[0]
         # If name isn't in dict return error
-        if class_name not in class_dict:
+        if class_name not in self.class_dict:
             print("** class doesn't exist **")
             return
 
         # Create an instance of the desired class
-        instance = class_dict[class_name]()
+        instance = self.class_dict[class_name]()
         # Save the instance
         instance.save()
         # Print id of new instance
@@ -141,7 +141,7 @@ class HBNBCommand(cmd.Cmd):
                 # Extract name from toks 
                 class_name = toks[0]
                 # Prints the instance for the class
-                if class_name in class_dict:
+                if class_name in self.class_dict:
                     for obj_id in obj.keys():
                         if obj[obj_id].__class__.__name__ == class_name:
                             print("{}".format(obj[obj_id]))
@@ -167,7 +167,7 @@ class HBNBCommand(cmd.Cmd):
             # Extracts attribute value
             value = toks[3]
 
-            if class_name in class_dict:
+            if class_name in self.class_dict:
                 if obj_id in obj:
                     # Check if the attribute isn't restricted
                     if attribute not in ['id', 'created_at', 'updated_at']:
