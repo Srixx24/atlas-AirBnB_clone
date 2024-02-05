@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
         # If key exists print obj str and save
         if key in obj:
             print(obj[key])
-            storage.save():
+            storage.save()
         else:
             # Return error otherwise
             print("** no instance found **")
