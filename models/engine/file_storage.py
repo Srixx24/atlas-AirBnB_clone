@@ -44,10 +44,11 @@ class FileStorage:
         """Load intance from save"""
         # Check if the JSON file exists
         #   note for future ace: try isfile
-        if os.path.exists(FileStorage.__file_path):
+        if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r') as file:
-                file_content = file.read()
-                self.__objects = json.loads(file_content)
+                if os.path.getsize(FileStorage.__file_path) > 0:
+                    file_content = file.read()
+                    self.__objects = json.load(file_content)
         else:
             pass
 
