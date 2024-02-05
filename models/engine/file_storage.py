@@ -7,6 +7,9 @@ with various methods for JSON serialization
 import json
 import os
 
+from models.base_model import BaseModel
+#will need to pull all other models in the same format
+
 
 class FileStorage:
     """
@@ -32,8 +35,11 @@ class FileStorage:
 
     def save(self):
         """Saves to existing instances"""
+        object_dict = dict()
+        for key, value in self.__objects.items():
+            object_dict[key] = self.__objects[key].to_dict()
         with open(self.__class__.__file_path, "w") as file:
-            file.write(json.dumps(self.__objects))
+            file.write(json.dumps(object_dict))
             # # Serialize objects 
             # objects = {key: val.to_dict() for
             #         key, val in self.__objects.items()}
@@ -47,11 +53,10 @@ class FileStorage:
         #   note for future ace: try isfile
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r') as file:
-                if os.path.getsize(FileStorage.__file_path) > 0:
-                    file_content = file.read()
-                    self.__objects = json.loads(file_content)
-        else:
-            pass
+                json_str = json.loads(file.read())
+            for key, value in json_str.items():
+                self.__objects[key] = eval(key.split(".")[0])(**value)
+            
 
 
 
