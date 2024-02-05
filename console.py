@@ -23,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
 
     # Global class dict variable, looking ahead we'll need a few
     class_dict = {
-            "BaseModel": BaseModel
+            "BaseModel": BaseModel,
             "User": User,
             "State": State,
             "City": City,
