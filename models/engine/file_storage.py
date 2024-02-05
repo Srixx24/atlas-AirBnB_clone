@@ -48,7 +48,7 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as file:
                 if os.path.getsize(FileStorage.__file_path) > 0:
                     file_content = file.read()
-                    self.__objects = json.load(file_content)
+                    self.__objects = json.loads(file_content)
         else:
             pass
 
