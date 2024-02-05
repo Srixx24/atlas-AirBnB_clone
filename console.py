@@ -4,8 +4,10 @@ Opens a command line interpreter and prompts user for a command
 """
 import cmd
 import sys
-from models import storage
-from models.base_model import BaseModel
+import models
+#from models import storage
+#from models.base_model import BaseModel
+#from models import user, city, state, amenity, place, review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -18,6 +20,12 @@ class HBNBCommand(cmd.Cmd):
     # Global class dict variable, looking ahead we'll need a few
     class_dict = {
             "BaseModel": BaseModel
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review
     }
 
     def do_quit(self, arg):
