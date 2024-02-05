@@ -82,12 +82,22 @@ class HBNBCommand(cmd.Cmd):
         # Get all obj from storage
         obj = storage.all()
 
-        # Print the obj string if it exsist and is in known classes
-        if obj_id in obj and isinstance(obj[obj_id], self.class_dict[class_name]):
-            print("{}".format(obj[obj_id]))
+        # Create the key
+        key = class_name + "." + obj_id
+
+        # If key exists print obj str
+        if key in obj:
+            print(obj[key])
         else:
             # Return error otherwise
             print("** no instance found **")
+
+        # Print the obj string if it exsist and is in known classes
+        #if obj_id in obj and isinstance(obj[obj_id], self.class_dict[class_name]):
+        #    print("{}".format(obj[obj_id]))
+        #else:
+        #     Return error otherwise
+        #   print("** no instance found **")
 
     def do_destroy(self, arg):
         """Deletes an instance"""
