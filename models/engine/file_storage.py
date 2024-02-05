@@ -33,11 +33,12 @@ class FileStorage:
     def save(self):
         """Saves to existing instances"""
         with open(self.__class__.__file_path, "w") as file:
-            # Serialize objects 
-            objects = {key: val.to_dict() for
-                    key, val in self.__objects.items()}
-            # Write serialized obj to file
-            json.dump(objects, file)
+            file.write(json.dumps(self.__objects))
+            # # Serialize objects 
+            # objects = {key: val.to_dict() for
+            #         key, val in self.__objects.items()}
+            # # Write serialized obj to file
+            # json.dump(objects, file)
         
 
     def reload(self):
