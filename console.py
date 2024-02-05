@@ -85,19 +85,13 @@ class HBNBCommand(cmd.Cmd):
         # Create the key
         key = class_name + "." + obj_id
 
-        # If key exists print obj str
+        # If key exists print obj str and save
         if key in obj:
             print(obj[key])
+            storage.save():
         else:
             # Return error otherwise
             print("** no instance found **")
-
-        # Print the obj string if it exsist and is in known classes
-        #if obj_id in obj and isinstance(obj[obj_id], self.class_dict[class_name]):
-        #    print("{}".format(obj[obj_id]))
-        #else:
-        #     Return error otherwise
-        #   print("** no instance found **")
 
     def do_destroy(self, arg):
         """Deletes an instance"""
