@@ -150,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exist **")
                     return
 
-    def do_update(self, arg):1
+    def do_update(self, arg):
         """Updates an instance"""
         # Retrieve all instances from the storage
         obj = storage.all()
