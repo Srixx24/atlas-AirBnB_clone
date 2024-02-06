@@ -61,8 +61,8 @@ class BaseModel:
         # Updates with current datetime
         self.updated_at = datetime.now()
         # Saves new instance to storage
-        self.__class__.models.storage.new(self)
-        self.__class__.models.storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary with all values of the instance"""
