@@ -57,7 +57,7 @@ class FileStorage:
                 print(json_str)
             for key, value in json_str.items():
                 self.__objects[key] = eval(key.split(".")[0])(**value)
-                print("Args: {0}, {1}".format(self.__objects[key], **value))
+                #print("Args: {0}, {1}".format(self.__objects[key], **value))
             
 
 
