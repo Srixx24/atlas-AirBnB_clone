@@ -10,4 +10,4 @@ from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
     """Class BaseModel Unittest"""
-    boop
+    
