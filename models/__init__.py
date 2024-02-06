@@ -4,7 +4,7 @@ Directoy package for organization of code and import modules
 """
 
 
-from models.engine.file_storage import FileStorage
+from .engine.file_storage import FileStorage
 
 # Create FileStorage instance
 storage = FileStorage()
