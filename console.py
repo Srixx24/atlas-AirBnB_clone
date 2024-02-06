@@ -179,7 +179,7 @@ class HBNBCommand(cmd.Cmd):
             # Extracts id
             obj_id = toks[1]
             # Extracts attribute name
-            attributes = toks[2]
+            attribute = toks[2]
             # Extracts attribute value
             value = toks[3]
 

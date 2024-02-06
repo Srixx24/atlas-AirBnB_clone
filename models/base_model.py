@@ -46,6 +46,9 @@ class BaseModel:
             # Saves new instance to storage
             models.storage.new(self)
 
+            #Where set the other attrs for class initialization?
+            #Need to? 
+
     def __str__(self):
         """Prints the string representation of attributes"""
         return "[{}] ({}) {}".format(
