@@ -44,7 +44,7 @@ class BaseModel:
             # Sets updated_at to current datetime
             self.updated_at = datetime.now()
             # Saves new instance to storage
-            self.__class__.models.storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Prints the string representation of attributes"""
