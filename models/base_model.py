@@ -35,7 +35,7 @@ class BaseModel:
                     #set the attr
                     setattr(self, key, kwargs[key])
             # Saves new instance to storage
-            self.__class__.models.storage.new(self)
+            models.storage.new(self)
         else:
             # Makes unique id for instance
             self.id = str(uuid.uuid4())
