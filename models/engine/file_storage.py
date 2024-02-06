@@ -54,8 +54,10 @@ class FileStorage:
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r') as file:
                 json_str = json.loads(file.read())
+                print(json_str)
             for key, value in json_str.items():
                 self.__objects[key] = eval(key.split(".")[0])(**value)
+                print("Args: {0}, {1}".format(self.__objects[key], **value))
             
 
 
