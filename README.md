@@ -59,7 +59,8 @@ Below is a brief description of each file and its function to provide a working 
 <br>
 <br>
 
-![carbon](https://github.com/Ace-Quantum/atlas-AirBnB_clone/assets/144152489/65df034e-6489-411e-b650-13af1a6ea5ff)
+![carbon (1)](https://github.com/Ace-Quantum/atlas-AirBnB_clone/assets/144152489/97979d52-43e1-4870-b1bd-587473983153)
+
 
 <br>
 
